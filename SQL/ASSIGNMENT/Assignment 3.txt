@@ -1,0 +1,22 @@
+Assignment 3: Write a SELECT query to retrieve all columns from a 'customers' table, and modify it to return only the customer name and email address for customers in a specific city.
+
+Create table customers(
+Customerid number primary key,
+CustomerName varchar2(20) not null,
+Email varchar2(20) not null unique,
+City varchar2(20) not null,
+Address varchar2(30),
+PhoneNumber varchar2(15)
+);
+describe customers;
+
+insert into customers (Customerid, CustomerName, Email, Gender, City, Address, PhoneNumber) values (1, 'Ragul', 'ragul@gmail.com', 'Male', 'Madurai', '5 st Anna Nagar', '7864356');
+insert into customers (Customerid, CustomerName, Email, Gender, City, Address, PhoneNumber) values (2, 'Raj', 'raj@gmail.com', 'Male', 'Chennai', '10 st Thambaram', '9864355');
+insert into customers (Customerid, CustomerName, Email, Gender, City, Address, PhoneNumber) values (3, 'Thirumalai', 'thiru@gmail.com', 'Male', 'Madurai', '10 st KK Nagar', '944341536');
+insert into customers (Customerid, CustomerName, Email, Gender, City, Address, PhoneNumber) values (4, 'SugaPriya', 'Female', 'priya@gmail.com', 'Banglore', '1 st Church Street', '994305885');
+insert into customers (Customerid, CustomerName, Email, Gender, City, Address, PhoneNumber) values (5, 'Monika', 'Female', 'moni@gmail.com', 'Delhi', '30 st JamNagar', '88832456');
+
+select * from customers;
+
+select CustomerName, Email from customers where City = 'Madurai';
+

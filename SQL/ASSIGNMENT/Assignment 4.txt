@@ -1,0 +1,35 @@
+Assignment 4: Craft a query using an INNER JOIN to combine 'orders' and 'customers' tables for customers in a specified region, and a LEFT JOIN to display all customers including those without orders?
+
+create table customer(
+Customerid number primary key,
+CustomerName varchar2(20) not null,
+Email varchar2(20),
+Region varchar2(20) not null
+);
+describe customer;
+
+create table orders(
+Orderid number primary key,
+Customerid number(10),
+Orderdate varchar2(20),
+TotalAmount number(10,2),
+foreign key (Customerid) references customer(Customerid)
+);
+describe orders;
+
+insert into customer (Customerid, CustomerName, Email, Region) values (1, 'Ragul', 'ragul@gmail.com', 'Asia');
+insert into customer (Customerid, CustomerName, Email, Region) values (2, 'Thirumalai', 'thiru@gmail.com', 'North America');
+insert into customer (Customerid, CustomerName, Email, Region) values (3, 'SugaPriya', 'priya@gmail.com', 'South America');
+insert into customer (Customerid, CustomerName, Email, Region) values (4, 'Monika', 'moni@gmail.com', 'Korea');
+select * from customer;
+
+insert into orders values (101, 1, '23-03-2024', 100.00);
+insert into orders values (102, 1, '1-05-2024', 200.50);
+insert into orders values (103, 2, '25-06-2024', 250.25);
+insert into orders values (104, 3, '28-04-2024', 150.25);
+insert into orders values (105, 4, '30-05-2024', 350.50);
+select * from orders;
+
+select * from customer
+left join orders on customer.Customerid = orders.Customerid
+where customer.Region = 'Asia';

@@ -1,0 +1,31 @@
+Assignment 2: Design a database schema for a library system, including tables, fields, and constraints like NOT NULL, UNIQUE, and CHECK. Include primary and foreign keys to establish relationships between tables?
+
+create table books(
+Bookid number  primary key,
+Title varchar2(20) not null,
+ISBN varchar2(20) unique,
+Publishedyear number check (Publishedyear > 0)
+);
+describe books;
+
+create table authors(
+Authorid number primary key,
+FirstName varchar2(20) not null,
+LastName varchar2(20) not null
+);
+describe authors;
+
+create table reservations(
+Reservationid number primary key,
+Bookid number not null,
+Memberid number not null,
+foreign key (Bookid) references books (Bookid)
+);
+describe reservations;
+
+Explanation:
+Primary Key(PK) : Unique identifier for each row in the table, Primary key can have only one in the table
+Foreign Key(FK) : Establishes relationships between tables.
+Not null : It means that the column cannot have null value.
+Unique : It means that all the values in the column are unique.
+Check : It means that all the values in a column satisfy a specific condition.

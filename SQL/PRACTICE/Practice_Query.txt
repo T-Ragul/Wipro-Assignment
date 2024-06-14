@@ -1,0 +1,95 @@
+PRACTICE QUERY!!!
+
+create table manufacture(
+Manufactureid number primary key,
+ManufactureName varchar2(20) not null,   
+);
+describe manufacture;
+
+create table product(
+Productid number primary key,
+ProductName varchar2(20) not null,
+Price decimal not null,
+Manufacturer number not null,
+foreign key (Manufacturer) references manufacture(Manufactureid)
+);
+describe Product;
+insert into manufacturer values (1, 'Sony');
+insert into manufacturer values (2, 'Samsung');
+insert into manufacturer values (3, 'Apple');
+insert into manufacturer values (4, 'Mi');
+insert into manufacturer values (5, 'Dell');
+insert into manufacturer values (6, 'Hp');
+select * from manufacture;
+
+insert into product values (1, 'Hard drive', 250, 5);
+insert into product values (2, 'Memory Card', 150, 6);
+insert into product values (3, 'Pendrive', 200, 2);
+insert into product values (4, 'DVD', 100, 5);
+insert into product values (5, 'Printer', 750, 3);
+insert into product values (6, 'Ac', 900, 1);
+insert into product values (7, 'Tv', 820, 2);
+insert into product values (8, 'Monitor', 500, 4);
+insert into product values (9, 'Headphone', 250, 6);
+insert into product values (10, 'Cpu', 950, 1);
+insert into product values (11, 'Fridge', 250, 5);
+select * from product;
+
+
+1.Select the names of all the products in the store?
+select ProductName from product;
+
+2.Select the names and the prices of all the products in the store?
+select ProductName, Price from product;
+
+3.Select the name of the products with a price less than or equal to $200?
+select ProductName from product where Price <= 200;
+
+4.Select all the products with a price between $250 and $800?
+select * from product where Price between 250 and 800;
+
+5.Select the name and price in cents?
+select ProductName, Price*100 from product;
+
+6.Compute the average price of all the products?
+select avg(Price) from product;
+
+7.Compute the average price of all products with manufacturer code equal to 2?
+select avg(Price) from product where Manufacturer = 2;
+
+8.Select the name and price of all products with a price larger than or equal to $250, and sort first by price (in descending order), and then by name (in ascending order)?
+select ProductName, Price from product where Price>=250 order by Price desc, ProductName asc;
+
+9.Select the product name, price, and manufacturer name of all the products?
+select product.ProductName, Price, manufacture.ManufactureName
+from product inner join manufacture
+on product.Manufacturer = manufacture.Manufactureid;
+
+10.Select the average price of each manufacturer's products, showing only the manufacturer's code?
+select avg(Price), Manufacturer
+from product
+group by Manufacturer;
+
+11.Select the average price of each manufacturer's products, showing the manufacturer's name?
+select avg(a.Price), b.ManufactureName 
+from product a join manufacture b 
+on a.Manufacturer = b.Manufactureid
+group by b.ManufactureName;
+
+12.Select the name and price of the cheapest product?
+select ProductName, Price from product 
+where Price = (select min(Price) from product);
+
+13.Add a new product?
+insert into product values (12, 'Speaker', 110, 4);
+
+14.Update the name of product 7 to "Android Tv"?
+update product set ProductName = 'Android Tv' where Productid = 7;
+
+15.Apply a 10% discount to all products?
+update product set Price = Price*0.9;
+
+16.Apply a 10% discount to all products with a price larger than or equal to $500?
+update product set Price = Price * 0.9 where Price >= 500;
+
+select * from product; 
