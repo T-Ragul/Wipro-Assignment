@@ -1,0 +1,44 @@
+PRACTICE QUERRY 3 WINDOW_FUNCTION_RAKN!!!!
+
+select * from employee;
+update employee set department='developer' where id ='7';
+
+select department,count(name) from employee
+group by department;
+
+select id,name,salary,age,
+count(name) over(partition by department)
+from employee;
+
+select id,name,salary,age,
+count(name) over(partition by department),
+avg(salary) over(partition by department)
+from employee;
+
+select id,name,salary,department,
+rank() over(order by salary desc)
+from employee;
+
+select id,name,salary,department,
+rank() over(partition by department order by salary desc)
+from employee;
+
+select id,name,salary,department,
+sum(salary) over (partition by department)
+from employee;
+
+select id,name,salary,department,
+dense_rank() over(order by salary)
+from employee;
+
+select id,name,salary,department,
+dense_rank() over(order by salary)  as emprank
+from employee;
+
+select * from(select id,name,salary,department,
+dense_rank() over(order by salary)  as emprank
+from employee)
+where emprank = 5
+
+
+

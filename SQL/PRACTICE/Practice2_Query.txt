@@ -1,0 +1,86 @@
+PRACTICE 2!!!!!!!
+
+create table warehouse(
+warehouseid number not null primary key,
+location varchar2(20) not null,
+capacity number not null
+);
+describe warehouse;
+create table box(
+boxid char(4) not null primary key,
+contents varchar2(20) not null,
+value real not null,
+WareHouse integer not null,
+foreign key (WareHouse) references warehouse(warehouseid)
+)
+describe box;
+
+insert into warehouse values (1, 'madurai', 3);
+insert into warehouse values (2, 'chennai', 4);
+insert into warehouse values (3, 'banglore', 2);
+insert into warehouse values (4, 'delhi', 5);
+insert into warehouse values (5, 'mumbai', 7);
+select * from warehouse;
+
+insert into box values ('0hgs', 'Rocks', 150, 3);
+insert into box values ('1hss', 'Rocks', 250, 5);
+insert into box values ('2aas', 'Scissors', 300, 3);
+insert into box values ('3gcs', 'Rocks', 240, 4);
+insert into box values ('4bsb', 'Scissors', 150, 2);
+insert into box values ('5qqs', 'Papers', 550, 1);
+insert into box values ('6xxx', 'Rocks', 650, 2);
+insert into box values ('7kky', 'Papers', 100, 1);
+insert into box values ('8abc', 'Scissors', 400, 3);
+select * from box;
+
+1.select all warehouse?
+select* from warehouse;
+
+2.select all box with values larger than $250?
+select value from box where value>250; 
+
+3.select all distinct content in all the boxes?
+select distinct contents from box;
+
+4.select the average value of all the boxes?
+select avg(value) from box;
+
+5.select the warehouseid and the average values of boxes in each warehouse?
+select warehouse, avg(value) from box group by warehouse;
+
+6.select the id of each boxes along with the name of the city the box is located in?
+select box.boxid, warehouse.location 
+from box join warehouse
+on box.WareHouse = warehouse.warehouseid;
+
+7.select the warehouse code along with the number of boxes in each warehouse?
+select warehouse, count(*)
+from box
+group by warehouse;
+
+8.select the code of all the boxes located in madurai?
+select box.boxid
+from box join warehouse
+on box.WareHouse = warehouse.warehouseid
+where warehouse.location = 'madurai';
+
+9.create a new warehouse in banglore with the capacity of 3 boxes?
+insert into warehouse values (6, 'banglore', 3);
+
+10.create a new box with code "H5RT" contain paper?
+insert into box values ('H5RT', 'Papers', 200, 2);
+
+11.reduce the value of all the box by 15%?
+update box set value = value * 0.85;
+
+12.Remove all the boxes with the value lower than $300 ?
+delete from box where value < 300;
+
+13.Add index for column warehouse in the table?
+create index index_warehouse on box (WareHouse);
+
+14.Remove the Index You Added Just?
+drop index index_warehouse;
+
+select * from warehouse;
+select * from box;
